@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+
+        <!-- http://getbootstrap.ssscom/docs/5.1/ -->
+
+
+        <link href="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.css" rel="stylesheet">
+        <script src="https://api.mapbox.com/mapbox-gl-js/v2.14.1/mapbox-gl.js"></script>
+        <link href="/static/index.css" rel="stylesheet">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <title>{% block title %}{% endblock %}</title>
+        <style>
+            #map-container {
+    height: 100%;
+    width: 250px;
+    float: left;
+    display: flex;
+}
+
+#map {
+    height: inherit;
+    width: inherit;
+    display: flex;
+    border-radius: 25px;
+    float: left;
+    justify-content: center;
+    transform: scale(1.03) perspective(200px);
+    cursor: pointer;
+    box-shadow: 0 0 20px -10px rrgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+        </style>
+    </head>
+    <body>
+        <main class="container-fluid py-5 text-center">
+            {% block main %}{% endblock %}
+        </main>
+    </body>
+    </html>

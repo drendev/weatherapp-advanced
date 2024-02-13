@@ -1,0 +1,110 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Weather Application
+{% endblock %}
+
+{% block main %}
+
+
+<div class="container">
+        <div class="left-info">
+            <div class="pic-gradient">
+
+          </div>
+            <div class="today-info">
+                <h2>CS50: Final Project</h2>
+                <span>Weather Web Application with</span>
+                <div>
+                    <span> Interactive 3D Map</span>
+                </div>
+                <div>
+
+                    <span>November, 2023</span>
+                </div>
+            </div>
+            <div class="today-weather">
+                <h2>
+                    Technology Used:
+                </h2>
+                <h5>Python, Javascript, HTML, CSS</h5>
+            </div>
+        </div>
+
+        <div class="right-info">
+            <div class="day-info">
+            <div class="btn-container">
+                <form method="post">
+                <input type="text" placeholder="Enter City" name="search_city" required>
+                <button class="loc-button" type="submit">Search Location</button>
+            </form>
+            </div>
+
+
+        </div>
+    </div>
+
+    <script>
+        mapboxgl.accessToken = 'pk.eyJ1IjoiZHJlbmRldiIsImEiOiJjbG9yY3RoYzUwZjl6MmxwZWwyem9xY3l5In0.3lNYlrxRQmmIHY6vjg59zQ';
+    const map = new mapboxgl.Map({
+    // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
+
+    style: 'mapbox://styles/mapbox/streets-v12',
+    center: [120.9841, 14.6571],
+    zoom: 16.5,
+    pitch: 45,
+    bearing: -17.6,
+    container: 'map',
+    antialias: true
+    });
+
+    map.on('style.load', () => {
+    // Insert the layer beneath any symbol layer.
+    const layers = map.getStyle().layers;
+    const labelLayerId = layers.find(
+    (layer) => layer.type === 'symbol' && layer.layout['text-field']
+    ).id;
+
+    // The 'building' layer in the Mapbox Streetss
+    // vector tileset contains building height data
+    // from OpenStreetMap.
+    map.addLayer(
+    {
+    'id': 'add-3d-buildings',
+    'source': 'composite',
+    'source-layer': 'building',
+    'filter': ['==', 'extrude', 'true'],
+    'type': 'fill-extrusion',
+    'minzoom': 15,
+    'paint': {
+    'fill-extrusion-color': '#aaa',
+
+    // Use an 'interpolate' expression to
+    // add a smooth transition effect to
+    // the buildings as the user zooms in.
+    'fill-extrusion-height': [
+    'interpolate',
+    ['linear'],
+    ['zoom'],
+    15,
+    0,
+    15.05,
+    ['get', 'height']
+    ],
+    'fill-extrusion-base': [
+    'interpolate',
+    ['linear'],
+    ['zoom'],
+    15,
+    0,
+    15.05,
+    ['get', 'min_height']
+    ],
+    'fill-extrusion-opacity': 0.6
+    }
+    },
+    labelLayerId
+    );
+    });
+    </script>
+{% endblock %}
