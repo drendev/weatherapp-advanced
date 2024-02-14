@@ -1,2 +1,2 @@
 # WEATHER WEB APPLICATION:
-#### Will provide a description sooner.
+#### Showcasing ethical coding & patterns, REST API integration, MapBox, Flask, and JavaScript. 
